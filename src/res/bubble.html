@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+body{
+	font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	width: 1200px;
+	background: #fff;
+}
+
+.fig{
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	float: left;
+	width: 1200px;
+}
+
+.chart{
+	clear: left;
+	float: left;
+	width: 800px;
+	display: inline;
+}
+
+.table{
+	float: right;
+	width: 400px;
+	display: inline;
+}
+
+.xlabel, .ylabel {
+	font-weight: bold;
+}
+
+.axis path,
+.axis line {
+	fill: none;
+	stroke: black;
+	shape-rendering: crispEdges;
+}
+
+.axis text {
+	font-family: sans-serif;
+	font-size: 12px;
+}
+.tipsy {
+	font-size: 10px;
+	position: absolute;
+	padding: 5px;
+	/*word-wrap: break-word;*/
+	z-index: 100000;
+}
+
+.tipsy-inner {
+	background-color: #000;
+	color: #FFF;
+	max-width: 300px;
+	padding: 5px 8px 4px 8px;
+	text-align: center;
+}
+
+/* Rounded corners */
+.tipsy-inner {
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+/* Uncomment for shadow */
+/*.tipsy-inner { box-shadow: 0 0 5px #000000; -webkit-box-shadow: 0 0 5px #000000; -moz-box-shadow: 0 0 5px #000000; }*/
+
+.tipsy-arrow {
+	position: absolute;
+	width: 0;
+	height: 0;
+	line-height: 0;
+	border: 5px dashed #000;
+}
+
+/* Rules to colour arrows */
+.tipsy-arrow-n {
+	border-bottom-color: #000;
+}
+
+.tipsy-arrow-s {
+	border-top-color: #000;
+}
+
+.tipsy-arrow-e {
+	border-left-color: #000;
+}
+
+.tipsy-arrow-w {
+	border-right-color: #000;
+}
+
+.tipsy-n .tipsy-arrow {
+	top: 0px;
+	left: 50%;
+	margin-left: -5px;
+	border-bottom-style: solid;
+	border-top: none;
+	border-left-color: transparent;
+	border-right-color: transparent;
+}
+
+.tipsy-nw .tipsy-arrow {
+	top: 0;
+	left: 10px;
+	border-bottom-style: solid;
+	border-top: none;
+	border-left-color: transparent;
+	border-right-color: transparent;
+}
+
+.tipsy-ne .tipsy-arrow {
+	top: 0;
+	right: 10px;
+	border-bottom-style: solid;
+	border-top: none;
+	border-left-color: transparent;
+	border-right-color: transparent;
+}
+
+.tipsy-s .tipsy-arrow {
+	bottom: 0;
+	left: 50%;
+	margin-left: -5px;
+	border-top-style: solid;
+	border-bottom: none;
+	border-left-color: transparent;
+	border-right-color: transparent;
+}
+
+.tipsy-sw .tipsy-arrow {
+	bottom: 0;
+	left: 10px;
+	border-top-style: solid;
+	border-bottom: none;
+	border-left-color: transparent;
+	border-right-color: transparent;
+}
+
+.tipsy-se .tipsy-arrow {
+	bottom: 0;
+	right: 10px;
+	border-top-style: solid;
+	border-bottom: none;
+	border-left-color: transparent;
+	border-right-color: transparent;
+}
+
+.tipsy-e .tipsy-arrow {
+	right: 0;
+	top: 50%;
+	margin-top: -5px;
+	border-left-style: solid;
+	border-right: none;
+	border-top-color: transparent;
+	border-bottom-color: transparent;
+}
+
+.tipsy-w .tipsy-arrow {
+	left: 0;
+	top: 50%;
+	margin-top: -5px;
+	border-right-style: solid;
+	border-left: none;
+	border-top-color: transparent;
+	border-bottom-color: transparent;
+}
+
+</style>
+<body>
+
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> 
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.tipsy/1.0.2/jquery.tipsy.min.js"></script>
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.19.1/js/jquery.tablesorter.min.js"></script>
+	<script type="text/javascript" src="colorbrewer.js"></script>
+
+
+	<script type="text/javascript">
+	var diameter = 960, format = d3.format(".4f");
+
+	var bubble = d3.layout.pack()
+		.sort(null)
+		.size([diameter, diameter])
+		.padding(1.5)
+		.value(function(d) { 
+  			return (d.pval == 1 || d.pval == null) ? 0.5 : -1* Math.log(d.pval)  
+	 	 });
+
+	var svg = d3.select("body").append("svg")
+		.attr("width", diameter)
+		.attr("height", diameter)
+		.attr("class", "bubble");
+
+	d3.json("datagraph.json", function(datagraph) {
+		var node = svg.selectAll(".node")
+			.data(bubble.nodes(datagraph)
+				.filter(function(d) { return !d.children; }))
+			.enter().append("g")
+			.attr("class", "node")
+			.attr("id", function(d) { return d.acc; })
+			.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+		node.append("title").text(function(d) { 
+			return d.acc + " - " + 
+			"ratio: " + format(d.ratio) + " " +
+			"pval: " + format(d.pval); 
+		}); 
+		
+		var lratio_range = d3.extent(datagraph.children, function(d){return d.ratio == null ? 0 : Math.log2(d.ratio); });
+		var dval_range = d3.extent(datagraph.children, function(d){return d.value; });
+		var color_up = d3.scale.quantile()
+			.domain([0, lratio_range[1]])
+			.range(colorbrewer.Reds[9]);
+
+		var color_down = d3.scale.quantile()
+			.domain([lratio_range[0], 0])
+			.range(colorbrewer.Blues[9].reverse());
+
+		var color = function(rat){
+			if(rat > 1) return color_up(rat);
+			else return color_down(rat);
+		}
+
+		node.append("circle")
+		.attr("r", function(d) { return d.r; })
+		.style("fill", function(d) { return d.ratio == null ? "#151515" : color(Math.log2(d.ratio));})
+		.style("stroke", "#a5a5a5")
+		.style("opacity", function(d) {
+			return d.ratio != null ? 
+			0.6 + (d.value - dval_range[0])/(dval_range[1] - dval_range[0]) :
+			1.0;
+		});
+
+		$('svg circle').tipsy({ 
+			gravity: 'w', 
+			html: true, 
+			title: function() {
+				return this.__data__.name;
+			}
+		});
+
+  // node.append("text")
+  //     .attr("dy", ".1em")
+  //     .style("text-anchor", "middle")
+  //     .text(function(d) { return d.acc + "\n"; });
+});
+
+d3.select(self.frameElement).style("height", diameter + "px");
+
+</script>
+
+</body>
+</html>

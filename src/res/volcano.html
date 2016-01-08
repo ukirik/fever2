@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+body{
+	font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	width: 1080px;
+	background: #fff;
+}
+
+.fig{
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	float: left;
+	width: 1080px;
+}
+
+.chart{
+	clear: left;
+	float: left;
+	width: 800px;
+	display: inline;
+}
+
+table#info {
+    margin-left: -20px;
+    font-size: 0.7em;;
+	float: right;
+	width: 500px;
+	display: inline;
+}
+
+.xlabel, .ylabel {
+    font-weight: bold;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-family: sans-serif;
+    font-size: 12px;
+}
+.tipsy {
+    font-size: 10px;
+    position: absolute;
+    padding: 5px;
+    /*word-wrap: break-word;*/
+    z-index: 100000;
+}
+
+.tipsy-inner {
+    background-color: #000;
+    color: #FFF;
+    max-width: 300px;
+    padding: 5px 8px 4px 8px;
+    text-align: center;
+}
+
+/* Rounded corners */
+.tipsy-inner {
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+/* Uncomment for shadow */
+/*.tipsy-inner { box-shadow: 0 0 5px #000000; -webkit-box-shadow: 0 0 5px #000000; -moz-box-shadow: 0 0 5px #000000; }*/
+
+.tipsy-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    border: 5px dashed #000;
+}
+
+/* Rules to colour arrows */
+.tipsy-arrow-n {
+    border-bottom-color: #000;
+}
+
+.tipsy-arrow-s {
+    border-top-color: #000;
+}
+
+.tipsy-arrow-e {
+    border-left-color: #000;
+}
+
+.tipsy-arrow-w {
+    border-right-color: #000;
+}
+
+.tipsy-n .tipsy-arrow {
+    top: 0px;
+    left: 50%;
+    margin-left: -5px;
+    border-bottom-style: solid;
+    border-top: none;
+    border-left-color: transparent;
+    border-right-color: transparent;
+}
+
+.tipsy-nw .tipsy-arrow {
+    top: 0;
+    left: 10px;
+    border-bottom-style: solid;
+    border-top: none;
+    border-left-color: transparent;
+    border-right-color: transparent;
+}
+
+.tipsy-ne .tipsy-arrow {
+    top: 0;
+    right: 10px;
+    border-bottom-style: solid;
+    border-top: none;
+    border-left-color: transparent;
+    border-right-color: transparent;
+}
+
+.tipsy-s .tipsy-arrow {
+    bottom: 0;
+    left: 50%;
+    margin-left: -5px;
+    border-top-style: solid;
+    border-bottom: none;
+    border-left-color: transparent;
+    border-right-color: transparent;
+}
+
+.tipsy-sw .tipsy-arrow {
+    bottom: 0;
+    left: 10px;
+    border-top-style: solid;
+    border-bottom: none;
+    border-left-color: transparent;
+    border-right-color: transparent;
+}
+
+.tipsy-se .tipsy-arrow {
+    bottom: 0;
+    right: 10px;
+    border-top-style: solid;
+    border-bottom: none;
+    border-left-color: transparent;
+    border-right-color: transparent;
+}
+
+.tipsy-e .tipsy-arrow {
+    right: 0;
+    top: 50%;
+    margin-top: -5px;
+    border-left-style: solid;
+    border-right: none;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+}
+
+.tipsy-w .tipsy-arrow {
+    left: 0;
+    top: 50%;
+    margin-top: -5px;
+    border-right-style: solid;
+    border-left: none;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+}
+
+</style>
+
+<body>
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> 
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.tipsy/1.0.2/jquery.tipsy.min.js"></script>
+
+   <div class='fig'>
+	<div class='chart'></div>
+	<table id="info">
+	    <tr>
+		    <td><b>Accession:</b></td> <td><div id="acc"></div></td>
+	    </tr>
+	    <tr>
+		    <td><b>Name:</b></td> <td><div id="name"></div></td>
+	    </tr>
+	    <tr>
+		    <td><b>Gene:</b></td> <td><div id="gene"></div></td>
+	    </tr>
+	    <tr>
+		    <td><b>Ratio:</b></td> <td><div id="ratio"></div></td>
+	    </tr>
+	    <tr>
+		    <td><b>p-value:</b></td> <td><div id="pval"></div></td>
+	    </tr>
+	</table>
+   </div>
+
+<script type="text/javascript">
+//Width and height
+var w = 800, h = 500, padding = 100;
+
+// sig criteria for volcano plot
+var upreg = 2.0, downreg = 0.5, psig = 0.05;
+
+// Returns log2_ratio, and -log(pval) for each datapoint
+var ratioFun = function(d){ return d != null ? Math.log2(d) : null; },
+	pvalFun = function(d){ return d != null ? -1 * Math.log10(d) : null; },
+	colorFun = function(d){
+		if (d.ratio == null || d.pval == null)
+			return "lightgray";
+		else if(d.ratio >= upreg && d.pval <= psig)
+			return "firebrick";
+		else if(d.ratio <= downreg && d.pval <= psig)
+			return "royalblue";
+		else 
+			return "lightgray";
+	};
+
+var svg = d3.select(".chart")
+  .append("svg")
+	  .attr("width", w)
+	  .attr("height", h);
+
+var highlightElement = null;
+var info = function(d) {
+    $("#acc").html(d.acc);
+    $("#gene").html(d.sym);
+    $("#name").html(d.name);
+    $("#ratio").html(parseFloat(d.ratio).toPrecision(5));
+    $("#pval").html(parseFloat(d.pval).toPrecision(5));
+
+    var element = d3.select(this);
+    element.transition().duration(100)
+        // .attr("stroke", element.attr("fill"))
+        .attr("stroke", "coral")
+        .attr("stroke-width", 5);
+
+    if (highlightElement) {
+        highlightElement.transition().duration(100)
+            .attr("stroke","none");
+    }
+
+    highlightElement = element;		
+};
+
+d3.json("datagraph.json", function(json) {
+	var xrange = d3.extent(json.children, function(d) { return ratioFun(d.ratio); }),
+      	yrange = d3.extent(json.children, function(d) { return pvalFun(d.pval); });
+
+	var xScale = d3.scale.linear()
+		.domain([xrange[0], -1*xrange[0]])
+		.range([padding, w - padding]);
+
+	var yScale = d3.scale.linear()
+		.domain(yrange)
+		.range([h - padding, 10]);
+
+	svg.selectAll("circle")
+		.data(json.children)
+		.enter()
+		.append("svg:circle")
+		.attr("cx", function(d) { return xScale(ratioFun(d.ratio)); })
+		.attr("cy", function(d) { return yScale(pvalFun(d.pval)); })
+		.attr("r", 3)
+        .attr("fill", function(d) { return colorFun(d); })
+        .attr("opacity", 0.5)
+		.on("mouseover", function() {
+			d3.select(this)
+				.transition().duration(100)
+				.attr("r", 7);
+		})
+		.on("mouseout", function() {
+			d3.select(this)
+				.transition().duration(100)
+				.attr("r", 3);
+		})
+		.on("click", info)
+		.attr("id", function(d) { return d.acc; });
+
+	$('svg circle').tipsy({ 
+        gravity: 'w', 
+        html: true, 
+        title: function() {
+          return this.__data__.name;
+        }
+   });		
+   
+	var xAxis = d3.svg.axis()
+		.scale(xScale)
+		.orient("bottom")
+		.ticks(10);  //Set rough # of ticks
+
+	var yAxis = d3.svg.axis()
+		.scale(yScale)
+		.orient("left")
+		.ticks(10);
+
+	svg.append("g")
+		.attr("class", "axis")
+		.attr("transform", "translate(0," + (h - padding + 20) + ")")
+		.call(xAxis);           
+
+	svg.append("g")
+		.attr("class", "axis")
+		.attr("transform", "translate(" + (padding-10) + ",0)")
+		.call(yAxis);
+
+	svg.append("line")
+		.attr("class", "guide")
+		.attr("x1", xScale(Math.log2(upreg)))
+		.attr("x2", xScale(Math.log2(upreg)))
+		.attr("y1", yScale(yrange[0]))
+		.attr("y2", yScale(yrange[1]));
+
+	svg.append("line")
+		.attr("class", "guide")
+		.attr("x1", xScale(Math.log2(downreg)))
+		.attr("x2", xScale(Math.log2(downreg)))
+		.attr("y1", yScale(yrange[0]))
+		.attr("y2", yScale(yrange[1]));
+
+	svg.append("line")
+		.attr("class", "guide")
+		.attr("x1", xScale(xrange[0]))
+		.attr("x2", xScale(-1*xrange[0]))
+		.attr("y1", yScale(-1*Math.log10(psig)))
+		.attr("y2", yScale(-1*Math.log10(psig)));
+
+	svg.selectAll(".guide")
+		.attr("opacity", 0.5)
+		.attr("stroke-width", 1)
+		.attr("stroke", "firebrick")
+		.attr("stroke-dasharray", "2,4");
+
+	svg.append("text")
+		.attr("class", "xlabel")
+		.attr("text-anchor", "end")
+		.attr("x", w/2)
+		.attr("y", h-40)
+		.text("log2 Ratio");
+		 
+	svg.append("text")
+		.attr("class", "ylabel")
+		.attr("text-anchor", "end")
+		.attr("y", 40)
+		.attr("x", -h/2+50)		 
+		.attr("transform", "rotate(-90)")
+		.text("-log10 (p-value)");
+});
+
+</script>
+  
+</body>
+</html>

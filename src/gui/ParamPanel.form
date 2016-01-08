@@ -1,0 +1,403 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="sortButtons">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="randButtons">
+    </Component>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+      <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+        <EmptyBorder bottom="10" left="10" right="10" top="10"/>
+      </Border>
+    </Property>
+  </Properties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <Component id="statsPanel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="modelParamsPanel" min="-2" max="-2" attributes="1"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="roiPanel" min="-2" max="-2" attributes="1"/>
+                  <Group type="102" attributes="0">
+                      <Component id="nThreadsLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="nThreadsField" min="-2" pref="48" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="okButton" min="-2" pref="75" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="statsPanel" alignment="0" min="-2" max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="roiPanel" min="-2" pref="96" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="nThreadsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="nThreadsField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="okButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+          <Component id="modelParamsPanel" alignment="0" min="-2" max="-2" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="roiPanel">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title=" ROI borders "/>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Group type="102" alignment="0" attributes="1">
+                          <Component id="sigLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="sigField" min="-2" pref="55" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="regLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                          <Component id="regField" min="-2" pref="54" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="regLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="regField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="sigLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="sigField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="regLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Fold change"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="regField">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="1.5"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="sigLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Significance level"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="sigField">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="0.05"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="modelParamsPanel">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title=" Model parameters "/>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="alpha1Label" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="alpha1Field" min="-2" pref="54" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="32767" attributes="0"/>
+                          <Component id="kappa1Label" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="kappa1Field" min="-2" pref="54" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="alpha2Label" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="alpha2Field" min="-2" pref="54" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="32767" attributes="0"/>
+                          <Component id="kappa2Label" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                          <Component id="kappa2Field" min="-2" pref="54" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="alpha3Label" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="alpha3Field" min="-2" pref="54" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="alpha1Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="alpha1Field" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="kappa1Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="kappa1Field" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="alpha2Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="alpha2Field" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="kappa2Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="kappa2Field" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="alpha3Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="alpha3Field" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="alpha1Label">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&amp;alpha;_1"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="alpha1Field">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="0.75"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="alpha2Field">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="0.15"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="alpha2Label">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&amp;alpha;_2"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="alpha3Field">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="0.10"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="alpha3Label">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&amp;alpha;_3"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="kappa2Label">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&amp;kappa;_2"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="kappa2Field">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="8.0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="kappa1Field">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="0.75"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="kappa1Label">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&amp;kappa;_1"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="statsPanel">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title=" Statistics "/>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="sortMethodButton1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="sortMethodButton2" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="sortMethodButton3" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="sortLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="16" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="randLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                          <Component id="randMethodButton2" min="-2" max="-2" attributes="0"/>
+                          <Component id="randMethodButton1" alignment="0" min="-2" max="-2" attributes="1"/>
+                      </Group>
+                      <Component id="randMethodButton3" alignment="0" min="-2" max="-2" attributes="1"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="sortLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="randLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="randMethodButton1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="sortMethodButton1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="sortMethodButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="randMethodButton2" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="sortMethodButton3" min="-2" max="-2" attributes="0"/>
+                      <Component id="randMethodButton3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="sortLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Lucida Grande" size="11" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="GSEA Sort method"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="randLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Lucida Grande" size="11" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Randomization"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="sortMethodButton1">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="sortButtons"/>
+            </Property>
+            <Property name="selected" type="boolean" value="true"/>
+            <Property name="text" type="java.lang.String" value="[f]old change"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="sortMethodButton2">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="sortButtons"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="[p]-value"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="sortMethodButton3">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="sortButtons"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="[c]ombined"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="randMethodButton1">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="randButtons"/>
+            </Property>
+            <Property name="selected" type="boolean" value="true"/>
+            <Property name="text" type="java.lang.String" value="[E]mpirical dist."/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="randMethodButton3">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="randButtons"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="[P]ermutation"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="randMethodButton2">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="randButtons"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="[L]og-normal dist"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="nThreadsLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;# of threads"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="nThreadsField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="okButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="OK"/>
+        <Property name="selected" type="boolean" value="true"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>

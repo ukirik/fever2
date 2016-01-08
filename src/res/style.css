@@ -1,0 +1,210 @@
+/* Stylesheet for FEvER test results */
+@charset "utf-8";
+body { margin: 0px; padding: 0px; border: 0px; 
+	font-family: Georgia, Charcoal, Garamond, serif;
+	font-size: 1em;
+	background-image: url(body_bg.png);
+	background-repeat: no-repeat;
+	background-attachment:fixed;
+	background-position:100% 100%;
+}
+
+#container {
+	width: 1080px; 
+	margin: 0px; /* top right bottom left */ 
+	padding: 0;
+	position:absolute;
+	left:50%;
+	margin-left:-540px; 
+}
+
+#container h1, h2, h3, h4, h5{  color:#b00; }
+#container h2{ font-size:1.2em;	}
+
+/*  HEADER ROW RELATED STYLING  */
+#container #header { margin: 5px; padding: 0; width: 100%; height: 100px; float: left;}
+#container #header #logo { 
+  margin: 0; padding: 0; width: 70%; height: 100px; 
+  background-image: url(banner.png);
+  background-repeat: no-repeat;
+  float: left; }
+
+#container #header #info { 
+  margin: 0px 0px 0px 0px; padding: 0; 
+  width: 30%; height: 100px; float: right;}
+
+/*  INFO TABLE NESTED IN THE HEADER */
+#container #header #info table {
+	margin-top:10px;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size:0.75em;
+	line-height:1em; 
+	float:right;
+}
+
+#container #header #info table th {text-align:left; color:#b00; font-weight:bold; }
+#container #header #info table td {padding-left: 10px; text-align:right;}
+
+/*  NAVBAR RELATED STYLING  */
+#container #navBar {
+  padding:0; width: 100%; height:2em; float: left;
+  text-transform:uppercase; 
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-size:1em;
+  font-weight:bolder;
+}
+
+#container #navBar ul{margin:0px; padding:0px; list-style: none; line-height: normal;}
+#container #navBar ul li {float: left; }
+#container #navBar ul li a {
+	background: url(button-bg.png) #fff bottom left repeat-x;
+	padding:0 1em;
+	float: left;
+	display: block;
+	text-decoration: none;
+	text-align: center;
+	font-weight: bold;
+	font-size: 0.6em;
+	line-height:2em;
+	color: #b00;
+	border: 0.05em solid #ffdce9;
+	
+}
+
+#container #navBar ul li a:hover {
+	background: url(button-hover-bg.png) #fff top left repeat-x;
+	padding:0 1em;
+	float: left;
+	display: block;
+	text-decoration: none;
+	text-align: center;
+	font-weight: bold;
+	font-size: 0.6em;
+	line-height:2em;
+	color: #fff;
+	border: 0.05em solid #ffdce9;
+	
+}
+/*  INDEX PAGE RELATED STYLING  */
+#container #summary {width:55%; float:left;	}
+#container #summary p{	font-size:0.9em; display:block; }
+#container #summary ul { 
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+  margin-bottom:2em;
+  font-size:0.85em;
+  line-height: 1.5em;
+  }
+#container #summary li {  
+  margin: 0.5em;
+  background-image: url(i.gif);
+  background-repeat: no-repeat;
+  background-position: 0px 2px;
+  padding-left: 25px; 
+}
+
+#container #params { width:40%; float:right;	}
+#container #params p{	font-size:0.9em; display:block; }
+#container #params #codebox{
+	border:1px dotted #c00;
+	padding:5px 10px 5px 10px;
+	color:#c00;
+	margin-bottom:2em;
+	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+#container #params #codebox table td, 
+#container #params #codebox table th { padding:0px 5px; 	font-size:0.75em;}
+#container #params #codebox table td.title { width: 65%; text-align:right;}
+#container #params #codebox table td.val { width: 35%; text-align:center;}
+
+/*  RIGHT COLUMN RELATED STYLING  */
+
+#container #rightcol iframe {
+  border: none;
+  margin: 9em 1em;
+  padding: 0;
+  height: 1200px;
+}
+
+#container #rightcol { 
+  width: 30%; float: right; 
+  font-size: 0.8em;
+  font-family: Verdana, Helvetica, "Lucida Grande", sans-serif; 
+  margin-top: 0.5em 0em;
+}
+
+/*  LEFT COLUMN RELATED STYLING  */
+#container #leftcol { width: 68%; float: left; margin-bottom: 2em; padding: 0; }
+#container #leftcol #preamble {	font-size:0.9em;	}
+#container #leftcol table {
+	width: 100%;
+	font-family: Verdana, Helvetica, "Lucida Grande", sans-serif;
+	font-size:0.8em;
+}
+#container #leftcol table tr {width: 100%;}
+#container #leftcol table th {text-align:left; background:#fcc; padding-right: 10px; }
+#container #leftcol table td.score {
+	text-align:center;
+}
+
+#container #leftcol table.tablesorter thead tr {
+	font-size: 0.9em;
+	cursor: pointer;
+}
+	
+#container #leftcol table.tablesorter thead tr .header {
+	background-image: url(bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+}
+#container #leftcol table.tablesorter thead tr .headerSortUp {
+	background-image: url(asc.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+}
+#container #leftcol table.tablesorter thead tr .headerSortDown {
+	background-image: url(desc.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+}
+
+.filter {
+  margin-top: 5px;
+  padding: 0px 20px;
+  border-radius: 6px;
+  border:none;
+  display:inline-block;
+  color:#fff;
+  text-decoration: none;
+  text-transform: uppercase; 
+  font-weight: 600;
+  background-color: #ff8080;
+  height:2em;
+}
+.filter:hover {
+  text-decoration: none;
+  background-color:#ff3434;
+}
+.filter:focus {
+  outline:none;
+}
+	
+#container #leftcol table th, #container #leftcol table td {padding:0.5em;}
+#container #leftcol table a{color:#c00;}
+
+#container #footer { font-size: 0.75em; float: left; width: 100%; border-top: #c00 solid 2px; }
+
+
+/*  DATAGRAPH RELATED STYLING  */
+.node {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+.link {
+  stroke: #999;
+  stroke-opacity: .1;
+  stroke-width: 1px;
+}
